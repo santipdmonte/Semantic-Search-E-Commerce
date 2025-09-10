@@ -24,16 +24,7 @@ def vector_store_data(documents: list[Document]) -> list[str]:
 documents = [
     Document(
         page_content=f"{product["title"]} | {product["description"]} | {product["category"]} > {product["sub_category"]} | {product["brand"]}",
-        metadata={
-            "_id": product["_id"],
-            "title": product["title"],
-            "description": product["description"],
-            "category": product["category"],
-            "sub_category": product["sub_category"],
-            "brand": product["brand"],
-            "images": [image for image in product["images"]],
-            "actual_price": product["actual_price"]
-        }
+        metadata=product
     ) for product in data
 ]
 
