@@ -40,6 +40,7 @@ function renderResults(items) {
     const title = node.querySelector(".title");
     const price = node.querySelector(".price");
     const brand = node.querySelector(".brand");
+    const desc = node.querySelector(".desc");
 
     if (firstImage) {
       img.src = firstImage;
@@ -51,6 +52,9 @@ function renderResults(items) {
     title.textContent = meta.title || item.page_content?.slice(0, 80) || "Untitled";
     price.textContent = meta.actual_price ? `₹${meta.actual_price}` : "";
     brand.textContent = meta.brand || "";
+    const fromMeta = typeof meta.description === "string" ? meta.description : "";
+    const fromPage = typeof item.page_content === "string" ? item.page_content : "";
+    desc.textContent = fromMeta || fromPage;
 
     fragment.appendChild(node);
   }
