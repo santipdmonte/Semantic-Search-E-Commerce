@@ -2,10 +2,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 import uvicorn
-from dotenv import load_dotenv
-from embedding import vector_store
+from retrieve import retrieve_products
 from pathlib import Path
-load_dotenv()
 
 app = FastAPI()
 
@@ -20,8 +18,8 @@ app.add_middleware(
 
 @app.get("/products")
 def query_products(query: str):
-    results = vector_store.similarity_search(query, k=10)
-    return results
+
+    return retrieve_products(query, k=25)
 
 # Serve frontend (index.html and static assets) from the project frontend directory
 FRONTEND_DIR = Path(__file__).resolve().parent.parent / "frontend"
